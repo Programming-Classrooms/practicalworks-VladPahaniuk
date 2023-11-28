@@ -4,9 +4,9 @@
 #include<Windows.h>
 void getN_M(size_t& n, size_t& m) {
     while (n!= m ){
-    std::cout << "Введите количество строк: ";
+    std::cout << "Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚Рѕ СЃС‚СЂРѕРє: ";
     std::cin >> n;
-    std::cout << "Введите количество столбцов: ";
+    std::cout << "Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ: ";
     std::cin >> m;
     }
 }
@@ -19,7 +19,7 @@ void mtrDefine(double**& mtr, const size_t n, const size_t m) {
 
 void checkborder(double& leftborder, double& rightborder)
 {
-    std::cout << "Введите границы = ";
+    std::cout << "Р’РІРµРґРёС‚Рµ РіСЂР°РЅРёС†С‹ = ";
     std::cin >> leftborder >> rightborder;
     if (leftborder > rightborder)
     {
@@ -62,7 +62,7 @@ void get_user_input_type(double** mtr, const size_t n, const size_t m, double& l
 {
     std::int64_t condition = 0;
 
-    std::cout << "Как хотите ввести 1 - руками, 2 - рандомом  ";
+    std::cout << "РљР°Рє С…РѕС‚РёС‚Рµ РІРІРµСЃС‚Рё 1 - СЂСѓРєР°РјРё, 2 - СЂР°РЅРґРѕРјРѕРј  ";
     std::cin >> condition;
     if (condition != 1 && condition != 2)
     {
@@ -118,7 +118,7 @@ double scalar_proisved(double** mtr, const size_t n,
 
 }
 double findMinK(double** mtr, const size_t n, const size_t m) {
-    double minK = mtr[0][0]; // Инициализация переменной minK значением первого элемента матрицы
+    double minK = mtr[0][0]; 
     for (int j = 1; j < m; ++j) {
         if (mtr[0][j] > minK) {
             minK = mtr[0][j];
@@ -126,18 +126,18 @@ double findMinK(double** mtr, const size_t n, const size_t m) {
     }
 
 
-    // Находим минимум из максимальных элементов в каждой строке матрицы
+    //  РќР°С…РѕРґРёРј РјРёРЅРёРјСѓРј РёР· РјР°РєСЃРёРјР°Р»СЊРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ РІ РєР°Р¶РґРѕР№ СЃС‚СЂРѕРєРµ РјР°С‚СЂРёС†С‹
     for (int i = 1; i < n; ++i) {
-        double maxInRow = mtr[i][0]; // Инициализация переменной maxInRow значением первого элемента строки
+        double maxInRow = mtr[i][0]; 
 
-        // Находим максимальный элемент в текущей строке
+        // РћР±РЅРѕРІР»СЏРµРј minK, РµСЃР»Рё С‚РµРєСѓС‰РёР№ РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РјРµРЅСЊС€Рµ С‚РµРєСѓС‰РµРіРѕ Р·РЅР°С‡РµРЅРёСЏ minK
         for (int j = 1; j < m; ++j) {
             if (mtr[i][j] > maxInRow) {
                 maxInRow = mtr[i][j];
             }
         }
 
-        // Обновляем minK, если текущий максимальный элемент меньше текущего значения minK
+        // РћР±РЅРѕРІР»СЏРµРј minK, РµСЃР»Рё С‚РµРєСѓС‰РёР№ РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РјРµРЅСЊС€Рµ С‚РµРєСѓС‰РµРіРѕ Р·РЅР°С‡РµРЅРёСЏ minK
         if (maxInRow < minK) {
             minK = maxInRow;
         }
@@ -173,9 +173,9 @@ int main() {
         get_user_input_type(mtr, n, m, leftborder, rightborder);
         find_row_with_min_element(mtr, n, m, minRow, minElement);
         find_col_with_max_element(mtr, n, m, maxCol, maxElement);
-        std::cout << "Результат сколярного произведения равен: " << scalar_proisved(mtr, n, maxCol, minRow, result_of_scalar_proizved) << std::endl;
+        std::cout << "Р РµР·СѓР»СЊС‚Р°С‚ СЃРєРѕР»СЏСЂРЅРѕРіРѕ РїСЂРѕРёР·РІРµРґРµРЅРёСЏ СЂР°РІРµРЅ:: " << scalar_proisved(mtr, n, maxCol, minRow, result_of_scalar_proizved) << std::endl;
         double result = findMinK(mtr, n, m);
-        std::cout << "Наименьшее число K: " << result << std::endl;
+        std::cout << "РќР°РёРјРµРЅСЊС€РµРµ С‡РёСЃР»Рѕ K: " << result << std::endl;
     }
     catch (const std::exception e)
     {
