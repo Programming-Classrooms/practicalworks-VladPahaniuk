@@ -2,14 +2,22 @@
 #include<ctime>
 #include<iomanip>
 #include<Windows.h>
-void getN_M(size_t& n, size_t& m) {
-    while (n!= m ){
-    std::cout << "Введите количесто строк: ";
-    std::cin >> n;
-    std::cout << "Введите количество столбцов: ";
-    std::cin >> m;
+#include<string>
+void getNandM(size_t& n, size_t& m) {
+    std::string ns, ms;
+    while (n != m) {
+        std::cout << "Введите количество строк: ";
+        std::cin >> ns;
+        n = static_cast<size_t>(std::stoi(ns));
+        std::cout << "Введите количество столбцов: ";
+        std::cin >> ms;
+        m = static_cast<size_t>(std::stoi(ms));
+
+       
     }
 }
+
+
 void mtrDefine(double**& mtr, const size_t n, const size_t m) {
     mtr = new double* [n];
     for (size_t i = 0; i < n; ++i) {
@@ -17,7 +25,7 @@ void mtrDefine(double**& mtr, const size_t n, const size_t m) {
     }
 }
 
-void checkborder(double& leftborder, double& rightborder)
+void checkBorder(double& leftborder, double& rightborder)
 {
     std::cout << "Введите границы = ";
     std::cin >> leftborder >> rightborder;
@@ -32,7 +40,7 @@ void checkborder(double& leftborder, double& rightborder)
     }
 }
 
-void input_mtr_your_own(double** mtr, const size_t n, const size_t m) {
+void inputMtrYourOwn(double** mtr, const size_t n, const size_t m) {
     for (size_t i = 0; i < n; ++i)
     {
         for (size_t j = 0; j < m; ++j) {
@@ -40,7 +48,7 @@ void input_mtr_your_own(double** mtr, const size_t n, const size_t m) {
         }
     }
 }
-void fill_matrix_in_random(double** mtr, const size_t n, const size_t m, double& leftborder, double& rightborder) {
+void fillMatrixInRandom(double** mtr, const size_t n, const size_t m, double leftborder, double rightborder) {
     srand(time(NULL));
     for (size_t i = 0; i < n; ++i)
     {
@@ -49,20 +57,20 @@ void fill_matrix_in_random(double** mtr, const size_t n, const size_t m, double&
         }
     }
 }
-void output_mtr(double**& mtr, const size_t n, const size_t m) {
+void outputMtr(double** mtr, const size_t n, const size_t m) {
     for (size_t i = 0; i < n; ++i)
     {
         for (size_t j = 0; j < m; ++j) {
-            std::cout << std::setw(10) << mtr[i][j] << " ";
+            std::cout << std::setw(10) << mtr[i][j];
         }
         std::cout << std::endl;
     }
 }
-void get_user_input_type(double** mtr, const size_t n, const size_t m, double& leftborder, double& rightborder)
+void getUserInputType(double** mtr, const size_t n, const size_t m, double leftborder, double rightborder)
 {
     std::int64_t condition = 0;
 
-    std::cout << "Как хотите ввести 1 - руками, 2 - рандомом  ";
+    std::cout << "Как хотите ввести 1 - руками 2 - рандомом  ";
     std::cin >> condition;
     if (condition != 1 && condition != 2)
     {
@@ -70,18 +78,20 @@ void get_user_input_type(double** mtr, const size_t n, const size_t m, double& l
     }
     if (condition == 1)
     {
-        input_mtr_your_own(mtr, n, m);
+        inputMtrYourOwn(mtr, n, m);
     }
     if (condition == 2)
     {
-        checkborder(leftborder, rightborder);
-        fill_matrix_in_random(mtr, n, m, leftborder, rightborder);
+        checkBorder(leftborder, rightborder);
+        fillMatrixInRandom(mtr, n, m, leftborder, rightborder);
 
     }
     system("cls");
-    output_mtr(mtr, n, m);
+    outputMtr(mtr, n, m);
 }
-void find_row_with_min_element(double** mtr, const size_t n, const size_t m, size_t& minRow, double& minElement) {
+size_t findRowWithMinElement(double** mtr, const size_t n, const size_t m) {
+    size_t minRow = 0;
+    double minElement = 0;
     for (size_t i = 0; i < n; ++i)
     {
         for (size_t j = 0; j < m; ++j) {
@@ -92,8 +102,11 @@ void find_row_with_min_element(double** mtr, const size_t n, const size_t m, siz
             }
         }
     }
+    return minRow;
 }
-void find_col_with_max_element(double** mtr, const size_t n, const size_t m, size_t& maxCol, double& maxElement) {
+size_t findColWithMaxElement(double** mtr, const size_t n, const size_t m) {
+    size_t maxCol = 0;
+    double maxElement = 0;
     for (size_t i = 0; i < n; ++i)
     {
         for (size_t j = 0; j < m; ++j) {
@@ -104,20 +117,21 @@ void find_col_with_max_element(double** mtr, const size_t n, const size_t m, siz
             }
         }
     }
+    return maxCol;
 }
-double scalar_proisved(double** mtr, const size_t n,
-    size_t& maxCol, size_t& minRow, double& result_of_scalar_proizved) {
+double scalarMultiplication(double** mtr, const size_t n, size_t maxCol, size_t minRow) {
+    double resultOfScalarProizved = 0;
 
     for (size_t i = 0; i < n; i++)
     {
-        result_of_scalar_proizved += mtr[minRow][i] * mtr[i][maxCol];
+        resultOfScalarProizved += mtr[minRow][i] * mtr[i][maxCol];
 
     }
-    return  result_of_scalar_proizved;
+    return  resultOfScalarProizved;
 
 
 }
-double findMinK(double** mtr, const size_t n, const size_t m) {
+double FindMinK(double** mtr, const size_t n, const size_t m) {
     double minK = mtr[0][0]; 
     for (int j = 1; j < m; ++j) {
         if (mtr[0][j] > minK) {
@@ -125,19 +139,16 @@ double findMinK(double** mtr, const size_t n, const size_t m) {
         }
     }
 
-
-    //  Находим минимум из максимальных элементов в каждой строке матрицы
     for (int i = 1; i < n; ++i) {
         double maxInRow = mtr[i][0]; 
 
-        // Обновляем minK, если текущий максимальный элемент меньше текущего значения minK
+        
         for (int j = 1; j < m; ++j) {
             if (mtr[i][j] > maxInRow) {
                 maxInRow = mtr[i][j];
             }
         }
 
-        // Обновляем minK, если текущий максимальный элемент меньше текущего значения minK
         if (maxInRow < minK) {
             minK = maxInRow;
         }
@@ -146,7 +157,7 @@ double findMinK(double** mtr, const size_t n, const size_t m) {
     return minK;
 }
 
-void delete_mtr(double** mtr, const size_t n) {
+void deleteMtr(double**& mtr, const size_t n) {
     for (size_t i = 0; i < n; i++)
     {
         delete[] mtr[i];
@@ -161,26 +172,21 @@ int main() {
     double leftborder = 0;
     size_t n = 1;
     size_t m = 0;
-    double result_of_scalar_proizved = 0;
-    size_t minRow = 0;
-    size_t maxCol = 0;
-    double minElement = 0;
-    double maxElement = 0;
     try
     {
-        getN_M(n, m);
+        getNandM(n, m);
         mtrDefine(mtr, n, m);
-        get_user_input_type(mtr, n, m, leftborder, rightborder);
-        find_row_with_min_element(mtr, n, m, minRow, minElement);
-        find_col_with_max_element(mtr, n, m, maxCol, maxElement);
-        std::cout << "Результат сколярного произведения равен:: " << scalar_proisved(mtr, n, maxCol, minRow, result_of_scalar_proizved) << std::endl;
-        double result = findMinK(mtr, n, m);
+        getUserInputType(mtr, n, m, leftborder, rightborder);
+        size_t minRow = findRowWithMinElement(mtr, n, m);
+        size_t maxCol = findColWithMaxElement(mtr, n, m);
+        std::cout << "Результат скалярного произведения равен: " << scalarMultiplication(mtr, n, maxCol, minRow) << std::endl;
+        double result = FindMinK(mtr, n, m);
         std::cout << "Наименьшее число K: " << result << std::endl;
     }
-    catch (const std::exception e)
+    catch (std::invalid_argument)
     {
-        std::cout << "An exception occurred: " << e.what();
-        delete_mtr(mtr, n);
+        std::cout << "An exception occurred: ";
+        deleteMtr(mtr, n);
     }
     return 0;
 }
