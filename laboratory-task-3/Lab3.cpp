@@ -9,27 +9,27 @@
     нечетными номерами.*/
 
 #include <iostream>
-int get_size() {
-	double size_of_arr = 0;
+int64_t getSize() {
+	double sizeOfArr = 0;
 	std::cout << "Number of elements:\n";
-	while (size_of_arr <= 0) {
-		std::cin >> size_of_arr;
-		if (size_of_arr <= 0) {
+	while (sizeOfArr <= 0) {
+		std::cin >> sizeOfArr;
+		if (sizeOfArr <= 0) {
 			std::cout << "Incorrect input";
 			continue;
 		}
-		return size_of_arr;
+		return sizeOfArr;
 	}
 }
-void out_arr(double* arr, const int& n) {
+void outArr(double* arr, const int& n) {
 	for (size_t i = 0; i < n; ++i) {
 		std::cout << arr[i] << ' ';
 	}
 	std::cout << '\n';
 }
-void out_arr1(double* new_arr, const int& n) {
+void outArr1(double* newArr, const int& n) {
 	for (size_t i = 0; i < n; ++i) {
-		std::cout << new_arr[i] << ' ';
+		std::cout << newArr[i] << ' ';
 
 	}
 }
@@ -53,20 +53,20 @@ double multiplication(double* arr, const int& n) {
 	}
 	return res;
 }
-void input_arr(double* arr, const int& n) {
+void inputArr(double* arr, const int& n) {
 	for (size_t i = 0; i < n; ++i)
 		std::cin >> arr[i];
 }
-void input_from_keyboard(double* arr, const int& n) {
+void inputFromKeyboard(double* arr, const int& n) {
 	std::cout << "Enter array\n";
-	input_arr(arr, n);
+	inputArr(arr, n);
 }
 void swap(double& a, double& b) {
 	double help = b;
 	b = a;
 	a = help;
 }
-void  check_border(double& x, double& y){
+void  checkBorder(double& x, double& y){
 	while (x == y) {
 		std::cout << "Enter board valuse = ";
 		std::cin >> x >> y;
@@ -75,7 +75,7 @@ void  check_border(double& x, double& y){
 		}
 	}
 }
-void input_random(double* arr, double& x, double& y, const int& n) {
+void inputRandom(double* arr, double& x, double& y, const int& n) {
 	srand(time(NULL));
 	for (size_t i = 0; i < n; ++i) {
 		arr[i] = x + rand() * (y - x) / RAND_MAX;
@@ -83,7 +83,7 @@ void input_random(double* arr, double& x, double& y, const int& n) {
 	}
 
 }
-void filling_arr(double* arr0, double& x, double& y, const int& n0) {
+void fillingArr(double* arr0, double& x, double& y, const int& n0) {
 	int64_t condition = 0;
 	while (condition != 1 && condition != 2) {
 		std::cout << "Enter codition 1 - input keyboard, 2 - random values = ";
@@ -91,24 +91,24 @@ void filling_arr(double* arr0, double& x, double& y, const int& n0) {
 	}
 	switch (condition) {
 	case 1:
-		input_from_keyboard(arr0, n0);
+		inputFromKeyboard(arr0, n0);
 
 		break;
 
 	case 2:
-		check_border(x, y);
-		input_random(arr0, x, y, n0);
+		checkBorder(x, y);
+		inputRandom(arr0, x, y, n0);
 		std::cout << "Array generared " << '\n';
 
 	}
 	system("cls");
-	out_arr(arr0, n0);
+	outArr(arr0, n0);
 
 	//return multiplication(arr0, n0);
 
 }
 
-void buble_sort(double* arr, const int& n, int g) {
+void bubleSort(double* arr, const int& n, int g) {
 	double temp;
 	for (size_t i = g; i < n - 1; i += 2) {//buble sort
 		for (size_t j = g; j < n - 2; j += 2) {
@@ -120,29 +120,29 @@ void buble_sort(double* arr, const int& n, int g) {
 		}
 	}
 }
-int min_index(double* arr, const int& n) {
+int64_t minIndex(double* arr, const int& n) {
 	double min;
-	int64_t min_index = 0;
+	int64_t minIndex = 0;
 	min = arr[0];
 	for (size_t i = 0; i < n; ++i) {
 		if (min > arr[i]) {
 			min = arr[i];
-			min_index = i;
+			minIndex = i;
 		}
 	}
 
-	return min_index;
+	return minIndex;
 }
 
 
-double sum_before_min(double* arr, const int& n, int min_index) {
+double sumBeforeMin(double* arr, const int& n, int minIndex) {
 	double sum = 0;
 	try {
-		if (arr[0] == arr[min_index]) {
+		if (arr[0] == arr[minIndex]) {
 			throw "invalid\n";
 		}
 
-		for (size_t i = 0; i < min_index; ++i) { 
+		for (size_t i = 0; i < minIndex; ++i) { 
 
 			sum += arr[i];
 
@@ -156,12 +156,12 @@ double sum_before_min(double* arr, const int& n, int min_index) {
 }
 
 int main() {
-	double n = get_size(), res = 1.0;
+	size_t n = getSize(), res = 1.0;
 	double x = 0;
 	double y = 0;
 	double* arr = new double[n];
-	filling_arr(arr, x, y, n);
-	int64_t min_ind = min_index(arr, n);
+	fillingArr(arr, x, y, n);
+	int64_t minInd = minIndex(arr, n);
 
 
 	
@@ -173,18 +173,18 @@ int main() {
 
 	
 
-	double zuma = sum_before_min(arr, n, min_ind);
+	double zuma = sumBeforeMin(arr, n, minInd);
 
 	if (zuma != 0) {
 		std::cout << "Sum = " << zuma << '\n';
 	}
-	buble_sort(arr, n, 0);
-	buble_sort(arr, n, 1);
+	bubleSort(arr, n, 0);
+	bubleSort(arr, n, 1);
 
 	
 	
 	std::cout << "Sort array\n";
-	out_arr(arr, n);
+	outArr(arr, n);
 	delete[] arr;
 	return 0;
 }
