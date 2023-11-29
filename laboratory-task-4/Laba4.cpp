@@ -3,6 +3,8 @@
 #include<iomanip>
 #include<Windows.h>
 #include<string>
+
+
 void getNandM(size_t& n, size_t& m) {
     std::string ns, ms;
     while (n != m) {
