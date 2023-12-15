@@ -83,7 +83,7 @@ void inputRandom(double* arr, double& x, double& y, const int& n) {
 	}
 
 }
-void fillingArr(double* arr0, double& x, double& y, const int& n0) {
+void fillingArr(double* arr, double& x, double& y, const int& n) {
 	int64_t condition = 0;
 	while (condition != 1 && condition != 2) {
 		std::cout << "Enter codition 1 - input keyboard, 2 - random values = ";
@@ -91,20 +91,19 @@ void fillingArr(double* arr0, double& x, double& y, const int& n0) {
 	}
 	switch (condition) {
 	case 1:
-		inputFromKeyboard(arr0, n0);
+		inputFromKeyboard(arr, n);
 
 		break;
 
 	case 2:
 		checkBorder(x, y);
-		inputRandom(arr0, x, y, n0);
+		inputRandom(arr, x, y, n);
 		std::cout << "Array generared " << '\n';
 
 	}
 	system("cls");
-	outArr(arr0, n0);
+	outArr(arr, n);
 
-	//return multiplication(arr0, n0);
 
 }
 
@@ -173,10 +172,10 @@ int main() {
 
 	
 
-	double zuma = sumBeforeMin(arr, n, minInd);
+	double suma = sumBeforeMin(arr, n, minInd);
 
-	if (zuma != 0) {
-		std::cout << "Sum = " << zuma << '\n';
+	if (suma != 0) {
+		std::cout << "Sum = " << suma << '\n';
 	}
 	bubleSort(arr, n, 0);
 	bubleSort(arr, n, 1);
