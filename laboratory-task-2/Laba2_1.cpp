@@ -1,8 +1,12 @@
-#include <iostream>
-using namespace std;
 /*Написать программу, которая для заданного натурального числа:
 1. проверяет, различны ли цифры в записи числа (массив и строки
 не использовать);*/
+
+
+#include <iostream>
+using namespace std;
+
+
 int main()
 {
     int64_t num, temp, count = 0;
