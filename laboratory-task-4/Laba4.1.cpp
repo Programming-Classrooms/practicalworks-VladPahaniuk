@@ -11,8 +11,8 @@
 #include <Windows.h>
 #include <string>
 
-
-void getRowsAndColumns(size_t& rows, size_t& cols) {
+void getRowsAndColumns(size_t& rows, size_t& cols) 
+{
   std::string row, col;
   while (rows != cols) {
     std::cout << "Введите количество строк: ";
@@ -24,14 +24,14 @@ void getRowsAndColumns(size_t& rows, size_t& cols) {
   }
 }
 
-
-void mtrDefine(double**& mtr, size_t rows, size_t cols) {/*Пишу так как, я присваиваю значение не локальной mtr, а глобальной mtr(которая определена в main) */
+/*Пишу так как, я присваиваю значение не локальной mtr, а глобальной mtr(которая определена в main) */
+void mtrDefine(double**& mtr, size_t rows, size_t cols) 
+{
   mtr = new double* [rows];
   for (size_t i = 0; i < rows; ++i) {
     mtr[i] = new double[cols];
   }
 }
-
 
 void inputBorder(double& leftborder, double& rightborder)
 {
@@ -43,34 +43,32 @@ void inputBorder(double& leftborder, double& rightborder)
   }
 }
 
-
-void inputMtrFromKeyboard(double** mtr, size_t rows, size_t cols) {
-  for (size_t i = 0; i < rows; ++i)
-  {
+void inputMtrFromKeyboard(double** mtr, size_t rows, size_t cols) 
+{
+  for (size_t i = 0; i < rows; ++i){
     for (size_t j = 0; j < cols; ++j) {
       std::cin >> mtr[i][j];
     }
   }
 }
 
-
-double GenerateRandomValuesInInterval(double& leftborder, double& rightborder){
+double GenerateRandomValuesInInterval(double& leftborder, double& rightborder)
+{
   double randomValue = leftborder + rand() * (rightborder - leftborder) / RAND_MAX;
   return randomValue;
 }
 
-
-void fillMtrInRandom(double** mtr, size_t rows, size_t cols, double& leftborder, double& rightborder) {
-  for (size_t i = 0; i < rows; ++i)
-  {
+void fillMtrInRandom(double** mtr, size_t rows, size_t cols, double& leftborder, double& rightborder)
+ {
+  for (size_t i = 0; i < rows; ++i){
     for (size_t j = 0; j < cols; ++j) {
       mtr[i][j] = GenerateRandomValuesInInterval(leftborder, rightborder);
     }
   }
 }
 
-
-void printMtr(double**& mtr, size_t rows, size_t cols) {
+void printMtr(double**& mtr, size_t rows, size_t cols) 
+{
   for (size_t i = 0; i < rows; ++i)
   {
     for (size_t j = 0; j < cols; ++j) {
@@ -80,7 +78,6 @@ void printMtr(double**& mtr, size_t rows, size_t cols) {
   }
 }
 
-
 double selectInputType()
 {
   std::int32_t condition = 0;
@@ -89,16 +86,13 @@ double selectInputType()
   return condition;
 }
 
-
 void fillingMtr(double** mtr, size_t rows, size_t cols, double& leftborder, double& rightborder)
 {
   uint32_t choice = selectInputType();
-  if (choice != 1 && choice != 2)
-  {
+  if (choice != 1 && choice != 2){
     throw std::exception("Invalid choice.");
   }
-  if (choice == 1)
-  {
+  if (choice == 1){
     inputMtrFromKeyboard(mtr, rows, cols);
   }
   if (choice == 2)
@@ -110,10 +104,9 @@ void fillingMtr(double** mtr, size_t rows, size_t cols, double& leftborder, doub
   printMtr(mtr, rows, cols);
 }
 
-
-void findRowWithMinIndex(double** mtr, size_t rows, size_t cols, size_t& minRow, double& minElement) {
-  for (size_t i = 0; i < rows; ++i)
-  {
+void findRowWithMinIndex(double** mtr, size_t rows, size_t cols, size_t& minRow, double& minElement)
+ {
+  for (size_t i = 0; i < rows; ++i) {
     for (size_t j = 0; j < cols; ++j) {
       if (mtr[i][j] < minElement) {
         minElement = mtr[i][j];
@@ -123,10 +116,9 @@ void findRowWithMinIndex(double** mtr, size_t rows, size_t cols, size_t& minRow,
   }
 }
 
-
-void findColWithMaxIndex(double** mtr, size_t rows, size_t cols, size_t& maxCol, double& maxElement) {
-  for (size_t i = 0; i < rows; ++i)
-  {
+void findColWithMaxIndex(double** mtr, size_t rows, size_t cols, size_t& maxCol, double& maxElement)
+ {
+  for (size_t i = 0; i < rows; ++i){
     for (size_t j = 0; j < cols; ++j) {
       if (mtr[i][j] > maxElement) {
         maxElement = mtr[i][j];
@@ -136,18 +128,17 @@ void findColWithMaxIndex(double** mtr, size_t rows, size_t cols, size_t& maxCol,
   }
 }
 
-
 double scalarMultiplication(double** mtr, size_t rows,
-  size_t& maxCol, size_t& minRow, double& resultOfScalarMultiplication) {
-  for (size_t i = 0; i < rows; i++)
-  {
+  size_t& maxCol, size_t& minRow, double& resultOfScalarMultiplication)
+{
+  for (size_t i = 0; i < rows; i++){
     resultOfScalarMultiplication += mtr[minRow][i] * mtr[i][maxCol];
   }
   return  resultOfScalarMultiplication;
 }
 
-
-double findMinK(double** mtr, const size_t rows, const size_t cols) {
+double findMinK(double** mtr, const size_t rows, const size_t cols)
+{
   double minK = mtr[0][0];
   // Инициализация переменной minK значением первого элемента матрицы
   for (int j = 1; j < cols; ++j) {
@@ -172,17 +163,16 @@ double findMinK(double** mtr, const size_t rows, const size_t cols) {
   return minK;
 }
 
-
-void deleteMtr(double** mtr, const size_t rows) {
-  for (size_t i = 0; i < rows; i++)
-  {
+void deleteMtr(double** mtr, const size_t rows) 
+{
+  for (size_t i = 0; i < rows; i++){
     delete[] mtr[i];
   }
   delete[] mtr;
 }
 
-
-int main() {
+int main() 
+{
   srand(time(NULL));
   SetConsoleCP(1251);
   SetConsoleOutputCP(1251);
@@ -196,8 +186,7 @@ int main() {
   size_t maxCol = 0;
   double minElement = 0;
   double maxElement = 0;
-  try
-  {
+  try {
     getRowsAndColumns(rows, cols);
     mtrDefine(mtr, rows, cols);
     fillingMtr(mtr, rows, cols, leftborder, rightborder);
@@ -208,8 +197,7 @@ int main() {
     std::cout << "Наименьшее число K: " << result << std::endl;
     deleteMtr(mtr, rows);
   }
-  catch (const std::exception e)
-  {
+  catch (const std::exception e) {
     std::cout << "An exception occurred: " << e.what();
     deleteMtr(mtr, rows);
   }
