@@ -29,20 +29,20 @@ double calculation(int32_t x, int32_t k)
 
 int main()
 {
-  try{
+  try {
       int32_t k;
       double x;
       cout << "Input X:\n";
       cin >> x;
       cout << "Input K:\n";
       cin >> k;
-      if (k < 1){
+      if (k < 1) {
           throw std::exception("k must be a natural number\n");
       }
       double summ = calculation(x, k);
       cout << "e^-x " << exp(-x) << "\tsum= " << summ;
   }
-  catch (const std::exception &e){
+  catch (const std::exception &e) {
           std::cerr << "Exception: " << e.what() << std::endl;
   }
   return 0;
