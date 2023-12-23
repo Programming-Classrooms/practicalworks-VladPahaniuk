@@ -1,9 +1,5 @@
-#define _USE_MATH_DEFINES
-#include <iostream> 
-#include <cmath> 
-#include <functional> 
-#include <iomanip> 
-/*Вычислить значение определенного интеграла с аналитически заданной подынтегральной
+/*
+Вычислить значение определенного интеграла с аналитически заданной подынтегральной
 функцией с заданной точностью eps
 Вариант 7
 А) по формуле левых прямоугольников;
@@ -23,23 +19,38 @@ n=4. Чтобы оценить точность, с которой вычисл�
 которых должны быть функция для вычисления значения подынтегрального выражения, пределы
 интегрирования и точность вычислений. Головная программа должна вывести результат вычислений
 для записанных в задании интегралов по заданным формулам и значение n, при котором достигнута
-заданная точность. Для проверки вычислений в таблице приведены значения интегралов.*/
+заданная точность. Для проверки вычислений в таблице приведены значения интегралов.
+*/
 
-double functionFirst(double x) { // первая подинтегральная функция 
+
+#define _USE_MATH_DEFINES
+#include <iostream> 
+#include <cmath> 
+#include <functional> 
+#include <iomanip> 
+
+// первая подинтегральная функция 
+double functionFirst(double x) 
+{ 
   return (1 / (1 + sqrt(2*x)));
 }
 
-double functionSecond(double x) { // вторая подинтегральная функция 
+// вторая подинтегральная функция 
+double functionSecond(double x) 
+{ 
   double e = M_E;
-  
   return (pow(e,x)* sin(x));
 }
 
-double functionThird(double x) { // третяя подинтегральная функция 
+// третяя подинтегральная функция 
+double functionThird(double x) 
+{ 
   return (1 / (3 + 2 * cos(x)));
 }
 
-double leftRectangleMethod(const std::function<double(double)>& f, double firstValue, double secondValue, double eps) { // метод левых прямоугольников 
+// метод левых прямоугольников 
+double leftRectangleMethod(const std::function<double(double)>& f, double firstValue, double secondValue, double eps) 
+{ 
   uint32_t n = 8;
   double splitStep = 0.0, x = 0.0, squareFirst = 0.0, squareSecond = 0.0;
   splitStep = (secondValue - firstValue) / n;// значение шага  
@@ -60,28 +71,24 @@ double leftRectangleMethod(const std::function<double(double)>& f, double firstV
   return squareSecond;
 }
 
-double homerSimpsonSumm(const std::function<double(double)>& f, uint32_t n, double firstValue, double secondValue) { // вычисление интеграла по методу Симпсона 
+// вычисление интеграла по методу Симпсона 
+double homerSimpsonSumm(const std::function<double(double)>& f, uint32_t n, double firstValue, double secondValue)
+{ 
   double splitStep = (secondValue - firstValue) / n;
   double result = f(firstValue) + f(secondValue);
-
   for (int i = 1; i < n; i += 2) {
     double x = firstValue + i * splitStep;
     result += 4 * f(x);
   }
-
   for (int i = 2; i < n - 1; i += 2) {
     double x = firstValue + i * splitStep;
     result += 2 * f(x);
   }
-
   return splitStep / 3.0 * result;
 }
 
-
-
-
-
-double homerSimpsonMethod(const std::function<double(double)>& f, double firstValue, double secondValue, double eps) {
+double homerSimpsonMethod(const std::function<double(double)>& f, double firstValue, double secondValue, double eps)
+{
   uint64_t n = 4;
   double x = 0;
   double squareFirst = 0;
@@ -95,7 +102,8 @@ double homerSimpsonMethod(const std::function<double(double)>& f, double firstVa
   return squareSecond;
 }
 
-void getInterval(double& firstValue, double& secondValue) {
+void getInterval(double& firstValue, double& secondValue)
+{
   std::cout << "Enter first value = ";
   std::cin >> firstValue;
   std::cout << "Enter second value = ";
@@ -103,7 +111,9 @@ void getInterval(double& firstValue, double& secondValue) {
   if (firstValue > secondValue)
     std::swap(firstValue, secondValue);
 }
-double getEps() {
+
+double getEps()
+{
   double eps = 0;
   std::cout << "Enter eps\n";
   std::cin >> eps;
@@ -113,12 +123,9 @@ double getEps() {
   return eps;
 }
 
-
-
-
-int main() {
-  try
-  {
+int main()
+{
+  try{
     double firstValue = 0;
     double secondValue = 0;
     double (*func[3])(double) = { functionFirst, functionSecond, functionThird };
@@ -131,7 +138,8 @@ int main() {
       std::cout << "simpsonMethod:" << std::setprecision(10) << integralSecond << '\n';
 
     }
-  }catch (const std::exception& e) {
+  }
+  catch (const std::exception& e) {
   std::cerr << "Exception: " << e.what() << std::endl;
   }
   return 0;
