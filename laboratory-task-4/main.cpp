@@ -18,7 +18,7 @@ void getRowsAndColumns(size_t& rows, size_t& cols)
     std::cout << "Enter number of rows: ";
     std::cin >> row;
     rows = static_cast<size_t>(std::stoi(row));
-    std::cout << "Enter number of rows: ";
+    std::cout << "Enter number of cols: ";
     std::cin >> col;
     cols = static_cast<size_t>(std::stoi(col));
   }
