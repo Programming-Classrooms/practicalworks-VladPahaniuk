@@ -11,6 +11,18 @@
 #include <string>
 #include <cctype>
 
+void checkFile(std::ifstream& fin)
+{ 
+if (!fin.good()){
+  throw std::exception("File does not exist.\n");
+}
+if (!fin){
+  throw std::exception("File is not opened.\n");}
+if (fin.peek() == EOF){
+  throw std::exception("File is empty.\n");
+}
+}
+
 std::string findMaxDigitSubstring(const std::string& line) 
 {
     std::string digitSubstring;
@@ -35,9 +47,7 @@ std::string findMaxDigitSubstring(const std::string& line)
 void processFile(const std::string& fin) 
 {
     std::ifstream inputFile(fin);
-    if (!inputFile.is_open()) {
-        std::cerr << "Unable to open " << fin << std::endl;
-    }
+    checkFile(inputFile);
     std::string maxLine;
     std::string maxDigitSubstring;
     std::string line;
