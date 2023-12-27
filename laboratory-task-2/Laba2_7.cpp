@@ -20,7 +20,7 @@ int main()
 	int32_t number = 0;
 	int32_t primeDist = 0;
 	int32_t numPair = 0;
-	std::cout << "Enter T pair of bliznecov\n";
+	std::cout << "Enter T number of pair of bliznecov\n";
 	std::cin >> number;
 	while (number <= 0) {
 		std::cout << "Enter natural number\n";
