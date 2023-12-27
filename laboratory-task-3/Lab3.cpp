@@ -12,9 +12,9 @@
 #include <iostream>
 #include <ctime>
 
-int64_t getSize()
+size_t getSize()
 {
-  double sizeOfArr = 0;
+  size_t sizeOfArr = 0;
   std::cout << "Number of elements:\n";
   while (sizeOfArr <= 0) {
     std::cin >> sizeOfArr;
@@ -37,7 +37,7 @@ void outArr(double* arr, const int& n)
 double multiplication(double* arr, const int& n)
 {
   double res = 1;
-  int64_t cnt = 0;
+  size_t cnt = 0;
     for (size_t i = 0; i < n; ++i) {
       if (arr[i] > 0) {
         res *= arr[i];
@@ -47,8 +47,6 @@ double multiplication(double* arr, const int& n)
     if (cnt == 0) {
       throw "No positive numbers\n";
     }
-
-  
   return res;
 }
 
@@ -92,16 +90,16 @@ void inputRandom(double* arr, double& x, double& y, const int& n)
 
 void fillingArr(double* arr, double& x, double& y, const int& n) 
 {
-  int64_t condition = 0;
-  while (condition != 1 && condition != 2) {
+  char condition = 0;
+  while (condition != '1' && condition != '2') {
     std::cout << "Enter codition 1 - input keyboard, 2 - random values = ";
     std::cin >> condition;
   }
   switch (condition) {
-  case 1:
+  case '1':
     inputFromKeyboard(arr, n);
     break;
-  case 2:
+  case '2':
     checkBorder(x, y);
     inputRandom(arr, x, y, n);
     std::cout << "Array generared " << '\n';
@@ -124,10 +122,10 @@ void bubleSort(double* arr, const int& n, int g)
   }
 }
 
-int64_t minIndex(double* arr, const int& n)
+size_t minIndex(double* arr, const int& n)
 {
   double min;
-  int64_t minIndex = 0;
+  size_t minIndex = 0;
   min = arr[0];
   for (size_t i = 0; i < n; ++i) {
     if (min > arr[i]) {
