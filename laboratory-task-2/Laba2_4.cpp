@@ -12,7 +12,7 @@ using namespace std;
 uint64_t myPow(const int& x, const int& y) 
 {
 		uint64_t resalt = static_cast<uint64_t>(x);
-		for (size_t i = 1; i < y; ++i) {
+		for (size_t i = 0; i < y - 1; ++i) {
 			resalt *= static_cast<uint64_t>(x);
 		}
 		return resalt;
