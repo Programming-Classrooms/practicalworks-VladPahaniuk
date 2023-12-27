@@ -38,7 +38,6 @@ double multiplication(double* arr, const int& n)
 {
   double res = 1;
   int64_t cnt = 0;
-  try {
     for (size_t i = 0; i < n; ++i) {
       if (arr[i] > 0) {
         res *= arr[i];
@@ -48,10 +47,8 @@ double multiplication(double* arr, const int& n)
     if (cnt == 0) {
       throw "No positive numbers\n";
     }
-  }
-  catch (const char* msg) {
-    std::cout << msg;
-  }
+
+  
   return res;
 }
 
@@ -144,17 +141,12 @@ int64_t minIndex(double* arr, const int& n)
 double sumBeforeMin(double* arr, const int& n, int minIndex) 
 {
   double sum = 0;
-  try {
     if (arr[0] == arr[minIndex]) {
       throw "invalid\n";
     }
     for (size_t i = 0; i < minIndex; ++i) {
       sum += arr[i];
     }
-  }
-  catch (const char* msg) {
-    std::cout << msg;
-  }
   return sum;
 }
 
@@ -165,13 +157,19 @@ int main() {
   double* arr = new double[n];
   fillingArr(arr, x, y, n);
   int64_t minInd = minIndex(arr, n);
-  double mult = multiplication(arr, n);
-  if (mult != 1) {
+  try {
+    double mult = multiplication(arr, n);
     std::cout << "Mulyiplication = " << mult << '\n';
   }
-  double suma = sumBeforeMin(arr, n, minInd);
-  if (suma != 0) {
+  catch (const char* msg) {
+    std::cout << msg;
+  }
+  try{
+    double suma = sumBeforeMin(arr, n, minInd);
     std::cout << "Sum = " << suma << '\n';
+  }
+  catch (const char* msg) {
+    std::cout << msg;
   }
   bubleSort(arr, n, 0);
   bubleSort(arr, n, 1);
