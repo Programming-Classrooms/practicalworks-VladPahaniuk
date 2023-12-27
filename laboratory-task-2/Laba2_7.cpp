@@ -8,7 +8,7 @@
 
 bool prime(const int32_t& n) 
 {
-	for (size_t i = 2; i < n; i++) {
+	for (size_t i = 2; i <= sqrt(n); i++) {
 		if (n % i == 0)
 			return false;
 	}
