@@ -11,7 +11,7 @@
 #include <Windows.h>
 #include <string>
 
-void getRowsAndColumns(size_t& rows, size_t& cols) 
+void getRowsAndColumns(size_t& rows, size_t& cols)
 {
   while (rows != cols) {
     std::cout << "Enter number of rows: ";
@@ -22,7 +22,7 @@ void getRowsAndColumns(size_t& rows, size_t& cols)
 }
 
 /*Пишу так как, я присваиваю значение не локальной mtr, а глобальной mtr(которая определена в main) */
-void mtrDefine(double**& mtr, size_t rows, size_t cols) 
+void mtrDefine(double**& mtr, size_t rows, size_t cols)
 {
   mtr = new double* [rows];
   for (size_t i = 0; i < rows; ++i) {
@@ -41,36 +41,36 @@ void inputBorder(double& leftborder, double& rightborder)
   }
 }
 
-void inputMtrFromKeyboard(double** mtr, size_t rows, size_t cols) 
+void inputMtrFromKeyboard(double** mtr, size_t rows, size_t cols)
 {
-  for (size_t i = 0; i < rows; ++i){
+  for (size_t i = 0; i < rows; ++i) {
     for (size_t j = 0; j < cols; ++j) {
       std::cin >> mtr[i][j];
     }
   }
 }
 
-double GenerateRandomValuesInInterval(double& leftborder, double& rightborder)
+double generateRandomValuesInInterval(double& leftborder, double& rightborder)
 {
   double randomValue = leftborder + rand() * (rightborder - leftborder) / RAND_MAX;
   return randomValue;
 }
 
 void fillMtrInRandom(double** mtr, size_t rows, size_t cols, double& leftborder, double& rightborder)
- {
-  for (size_t i = 0; i < rows; ++i){
+{
+  for (size_t i = 0; i < rows; ++i) {
     for (size_t j = 0; j < cols; ++j) {
-      mtr[i][j] = GenerateRandomValuesInInterval(leftborder, rightborder);
+      mtr[i][j] = generateRandomValuesInInterval(leftborder, rightborder);
     }
   }
 }
 
-void printMtr(double**& mtr, size_t rows, size_t cols) 
+void printMtr(double** mtr, size_t rows, size_t cols)
 {
   for (size_t i = 0; i < rows; ++i)
   {
     for (size_t j = 0; j < cols; ++j) {
-      std::cout << std::setw(10) << mtr[i][j] << " ";
+      std::cout << std::setw(10) << mtr[i][j];
     }
     std::cout << std::endl;
   }
@@ -84,13 +84,13 @@ double selectInputType()
   return condition;
 }
 
-void fillingMtr(double** mtr, size_t rows, size_t cols, double& leftborder, double& rightborder)
+void fillMtr(double** mtr, size_t rows, size_t cols, double& leftborder, double& rightborder)
 {
   uint32_t choice = selectInputType();
-  if (choice != 1 && choice != 2){
+  if (choice != 1 && choice != 2) {
     throw std::exception("Invalid choice.");
   }
-  if (choice == 1){
+  if (choice == 1) {
     inputMtrFromKeyboard(mtr, rows, cols);
   }
   if (choice == 2)
@@ -102,8 +102,10 @@ void fillingMtr(double** mtr, size_t rows, size_t cols, double& leftborder, doub
   printMtr(mtr, rows, cols);
 }
 
-void findRowWithMinIndex(double** mtr, size_t rows, size_t cols, size_t& minRow, double& minElement)
- {
+size_t findRowWithMinIndex(double** mtr, size_t rows, size_t cols)
+{
+  size_t minRow = 0;
+  double minElement = 0;
   for (size_t i = 0; i < rows; ++i) {
     for (size_t j = 0; j < cols; ++j) {
       if (mtr[i][j] < minElement) {
@@ -112,11 +114,14 @@ void findRowWithMinIndex(double** mtr, size_t rows, size_t cols, size_t& minRow,
       }
     }
   }
+  return minRow;
 }
 
-void findColWithMaxIndex(double** mtr, size_t rows, size_t cols, size_t& maxCol, double& maxElement)
- {
-  for (size_t i = 0; i < rows; ++i){
+size_t findColWithMaxIndex(double** mtr, size_t rows, size_t cols)
+{
+  size_t maxCol = 0;
+  double maxElement = 0;
+  for (size_t i = 0; i < rows; ++i) {
     for (size_t j = 0; j < cols; ++j) {
       if (mtr[i][j] > maxElement) {
         maxElement = mtr[i][j];
@@ -124,52 +129,51 @@ void findColWithMaxIndex(double** mtr, size_t rows, size_t cols, size_t& maxCol,
       }
     }
   }
+  return maxCol;
 }
 
-double scalarMultiplication(double** mtr, size_t rows,
-  size_t& maxCol, size_t& minRow, double& resultOfScalarMultiplication)
+double scalarMultiplication(double** mtr, size_t rows, size_t cols)
 {
-  for (size_t i = 0; i < rows; i++){
-    resultOfScalarMultiplication += mtr[minRow][i] * mtr[i][maxCol];
+  double resultOfScalarMultiplication = 0;
+  size_t minRows = findRowWithMinIndex(mtr, rows, cols);
+  size_t maxCols = findColWithMaxIndex(mtr, rows, cols);
+  for (size_t i = 0; i < rows; i++) {
+    resultOfScalarMultiplication += mtr[minRows][i] * mtr[i][maxCols];
   }
   return  resultOfScalarMultiplication;
 }
-
 double findMinK(double** mtr, const size_t rows, const size_t cols)
 {
-  double minK = mtr[0][0];
-  // Инициализация переменной minK значением первого элемента матрицы
-  for (int j = 1; j < cols; ++j) {
-    if (mtr[0][j] > minK) {
-      minK = mtr[0][j];
-    }
-  }
-  // Находим минимум из максимальных элементов в каждой строке матрицы
-  for (int i = 1; i < rows; ++i) {
-    double maxInRow = mtr[i][0]; // Инициализация переменной maxInRow значением первого элемента строки
-    // Находим максимальный элемент в текущей строке
-    for (int j = 1; j < cols; ++j) {
+  // Найти максимальный элемент в каждой строке и увеличить его на единицу
+  double* maxElements = new double[rows];
+  for (size_t i = 0; i < rows; ++i) {
+    double maxInRow = mtr[i][0];
+    for (int j = 0; j < cols; ++j) {
       if (mtr[i][j] > maxInRow) {
         maxInRow = mtr[i][j];
       }
-    }
-    // Обновляем minK, если текущий максимальный элемент меньше текущего значения minK
-    if (maxInRow < minK) {
-      minK = maxInRow;
+    } 
+    // Увеличиваем максимальный элемент на единицу
+    maxElements[i] = (maxInRow + 1);
+  }
+  int32_t minK = maxElements[0];
+  for (size_t i = 1; i < rows; ++i) {
+    if (maxElements[i] < minK) {
+      minK = maxElements[i];
     }
   }
   return minK;
 }
 
-void deleteMtr(double** mtr, const size_t rows) 
+void deleteMtr(double**& mtr, const size_t rows)
 {
-  for (size_t i = 0; i < rows; i++){
+  for (size_t i = 0; i < rows; i++) {
     delete[] mtr[i];
   }
   delete[] mtr;
 }
 
-int main() 
+int main()
 {
   srand(time(NULL));
   SetConsoleCP(1251);
@@ -179,18 +183,11 @@ int main()
   double leftborder = 0;
   size_t rows = 1;
   size_t cols = 0;
-  double resultOfScalarMultiplication = 0;
-  size_t minRow = 0;
-  size_t maxCol = 0;
-  double minElement = 0;
-  double maxElement = 0;
   try {
     getRowsAndColumns(rows, cols);
     mtrDefine(mtr, rows, cols);
-    fillingMtr(mtr, rows, cols, leftborder, rightborder);
-    findRowWithMinIndex(mtr, rows, cols, minRow, minElement);
-    findColWithMaxIndex(mtr, rows, cols, maxCol, maxElement);
-    std::cout << "The result of the dot product is: " << scalarMultiplication(mtr, rows, maxCol, minRow, resultOfScalarMultiplication) << std::endl;
+    fillMtr(mtr, rows, cols, leftborder, rightborder);
+    std::cout << "The result of the dot product is: " << scalarMultiplication(mtr, rows, cols) << std::endl;
     double result = findMinK(mtr, rows, cols);
     std::cout << "Smallest number K: " << result << std::endl;
     deleteMtr(mtr, rows);
@@ -201,4 +198,3 @@ int main()
   }
   return 0;
 }
-
