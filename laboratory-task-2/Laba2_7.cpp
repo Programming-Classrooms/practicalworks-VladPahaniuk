@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-bool prime(const int64_t& n) 
+bool prime(const int32_t& n) 
 {
 	for (size_t i = 2; i < n; i++) {
 		if (n % i == 0)
@@ -17,9 +17,9 @@ bool prime(const int64_t& n)
 
 int main() 
 {
-	int64_t number = 0;
-	int64_t primeDist = 0;
-	int64_t numPair = 0;
+	int32_t number = 0;
+	int32_t primeDist = 0;
+	int32_t numPair = 0;
 	std::cout << "Enter T pair of bliznecov\n";
 	std::cin >> number;
 	while (number <= 0) {
