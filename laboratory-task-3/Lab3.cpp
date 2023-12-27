@@ -124,8 +124,6 @@ void selectionSortEven(double* arr, const size_t& n)
     }
 }
 
-
-
 void selectionSortOdd(double* arr, const size_t& n)
 {
     int i, j, min_idx;
@@ -141,7 +139,6 @@ void selectionSortOdd(double* arr, const size_t& n)
         }
     }
 }
-
 
 size_t minIndex(double* arr, const size_t& n)
 {
