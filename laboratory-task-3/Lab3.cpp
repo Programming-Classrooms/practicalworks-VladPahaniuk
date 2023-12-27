@@ -26,7 +26,7 @@ size_t getSize()
   }
 }
 
-void outArr(double* arr, const int& n)
+void outArr(double* arr, const size_t& n)
 {
   for (size_t i = 0; i < n; ++i) {
     std::cout << arr[i] << ' ';
@@ -34,9 +34,9 @@ void outArr(double* arr, const int& n)
   std::cout << '\n';
 }
 
-double multiplication(double* arr, const int& n)
+double multiplication(double* arr, const size_t& n)
 {
-  double res = 1;
+  double res = 1.0;
   size_t cnt = 0;
     for (size_t i = 0; i < n; ++i) {
       if (arr[i] > 0) {
@@ -50,13 +50,13 @@ double multiplication(double* arr, const int& n)
   return res;
 }
 
-void inputArr(double* arr, const int& n)
+void inputArr(double* arr, const size_t& n)
 {
   for (size_t i = 0; i < n; ++i)
     std::cin >> arr[i];
 }
 
-void inputFromKeyboard(double* arr, const int& n)
+void inputFromKeyboard(double* arr, const size_t& n)
 {
   std::cout << "Enter array\n";
   inputArr(arr, n);
@@ -80,7 +80,7 @@ void  checkBorder(double& x, double& y)
   }
 }
 
-void inputRandom(double* arr, double& x, double& y, const int& n)
+void inputRandom(double* arr, double& x, double& y, const size_t& n)
 {
   srand(time(NULL));
   for (size_t i = 0; i < n; ++i) {
@@ -88,7 +88,7 @@ void inputRandom(double* arr, double& x, double& y, const int& n)
   }
 }
 
-void fillingArr(double* arr, double& x, double& y, const int& n) 
+void fillingArr(double* arr, double& x, double& y, const size_t& n) 
 {
   char condition = 0;
   while (condition != '1' && condition != '2') {
@@ -108,21 +108,42 @@ void fillingArr(double* arr, double& x, double& y, const int& n)
   outArr(arr, n);
 }
 
-void bubleSort(double* arr, const int& n, int g) 
+void selectionSortEven(double* arr, const size_t& n)
 {
-  double temp;
-  for (size_t i = g; i < n - 1; i += 2) {//buble sort
-    for (size_t j = g; j < n - 2; j += 2) {
-      if (arr[j] > arr[j + 2]) {
-        temp = arr[j];
-        arr[j] = arr[j + 2];
-        arr[j + 2] = temp;
-      }
+    size_t i, j, minIdx;
+    for (i = 0; i < n - 1; i+=2) {
+        minIdx = i;
+        for (j = i + 1; j < n; j+=2) {
+            if (arr[j] < arr[minIdx]){
+                minIdx = j;
+            }
+        }
+        if (minIdx != i){
+            swap(arr[minIdx], arr[i]);
+        }
     }
-  }
 }
 
-size_t minIndex(double* arr, const int& n)
+
+
+void selectionSortOdd(double* arr, const size_t& n)
+{
+    int i, j, min_idx;
+    for (i = 1; i < n - 1; i+=2) {
+        min_idx = i;
+        for (j = i + 1; j < n; j+=2) {
+            if (arr[j] < arr[min_idx]){
+                min_idx = j;
+            }
+        }
+        if (min_idx != i){
+            swap(arr[min_idx], arr[i]);
+        }
+    }
+}
+
+
+size_t minIndex(double* arr, const size_t& n)
 {
   double min;
   size_t minIndex = 0;
@@ -136,7 +157,7 @@ size_t minIndex(double* arr, const int& n)
   return minIndex;
 }
 
-double sumBeforeMin(double* arr, const int& n, int minIndex) 
+double sumBeforeMin(double* arr, const size_t& n, size_t minIndex) 
 {
   double sum = 0;
     if (arr[0] == arr[minIndex]) {
@@ -148,13 +169,15 @@ double sumBeforeMin(double* arr, const int& n, int minIndex)
   return sum;
 }
 
-int main() {
-  size_t n = getSize(), res = 1.0;
+int main()
+ {
+  size_t n = getSize();
+  double res = 1.0;
   double x = 0;
   double y = 0;
   double* arr = new double[n];
   fillingArr(arr, x, y, n);
-  int64_t minInd = minIndex(arr, n);
+  size_t minInd = minIndex(arr, n);
   try {
     double mult = multiplication(arr, n);
     std::cout << "Mulyiplication = " << mult << '\n';
@@ -169,8 +192,8 @@ int main() {
   catch (const char* msg) {
     std::cout << msg;
   }
-  bubleSort(arr, n, 0);
-  bubleSort(arr, n, 1);
+  selectionSortEven(arr, n);
+  selectionSortOdd(arr, n);
   std::cout << "Sort array\n";
   outArr(arr, n);
   delete[] arr;
