@@ -20,27 +20,27 @@ uint64_t myPow(const int& x, const int& y)
 
 int main() 
 {
-	int64_t num = 0;
+	int32_t num = 0;
 	while (num <= 0) {
 		cout << "Enter number = ";
 		cin >> num;
 		cout << '\n';
 	}
-	int64_t digitInNumber = 0;
-	int64_t temp = num;
+	int32_t digitInNumber = 0;
+	int32_t temp = num;
 	while (temp != 0) {
 		temp /= 10;
 		digitInNumber++;
 	}
 	cout << "Number of digits in a number = " << digitInNumber << '\n';
 	if ((digitInNumber % 2) != 0) {
-		int64_t central_num = static_cast<int>(num / myPow(10, digitInNumber/2) % 10);
+		int32_t central_num = static_cast<int>(num / myPow(10, digitInNumber/2) % 10);
 		cout << "central_num = " << central_num << '\n';
-		int64_t result = central_num * pow(10, digitInNumber + 1) + num * 10 + central_num;
+		int32_t result = central_num * pow(10, digitInNumber + 1) + num * 10 + central_num;
 		cout << "Result = " << result;
 	}
 	else {
-		cout << "It's even";
+		cout << "It's even\n";
 	}
 	return 0;
 }
