@@ -34,7 +34,7 @@ int main()
 	}
 	cout << "Number of digits in a number = " << digitInNumber << '\n';
 	if ((digitInNumber % 2) != 0) {
-		int32_t central_num = static_cast<int>(num / myPow(10, digitInNumber/2) % 10);
+		int32_t central_num = static_cast<int32_t>(num / myPow(10, digitInNumber/2) % 10);
 		cout << "central_num = " << central_num << '\n';
 		int32_t result = central_num * pow(10, digitInNumber + 1) + num * 10 + central_num;
 		cout << "Result = " << result;
