@@ -54,7 +54,7 @@ double leftRectangleMethod(const std::function<double(double)>& f, double firstV
   uint32_t n = 8;
   double splitStep = 0.0, x = 0.0, squareFirst = 0.0, squareSecond = 0.0;
   splitStep = (secondValue - firstValue) / n;// значение шага  
-  for (int step = 1; step <= n; ++step) {
+  for (size_t step = 1; step <= n; ++step) {
     x = firstValue + (step - 1) * splitStep;
     squareSecond += splitStep * f(x);
   }
@@ -94,7 +94,7 @@ double homerSimpsonMethod(const std::function<double(double)>& f, double firstVa
   double squareFirst = 0;
   double squareSecond = homerSimpsonSumm(f, n, firstValue, secondValue);
   n *= 2;
-  while (fabs(squareSecond - squareFirst) > eps) {
+  while (fabs(squareSecond - squareFirst) >= eps) {
     squareFirst = squareSecond;
     squareSecond = homerSimpsonSumm(f, n, firstValue, secondValue);
     n *= 2;
@@ -117,8 +117,8 @@ double getEps()
   double eps = 0;
   std::cout << "Enter eps\n";
   std::cin >> eps;
-  while (eps <= 0) {
-    throw std::out_of_range("A negative number has been entered.");
+  while (eps <= 1) {
+    throw std::out_of_range("Invalid input.");
   }
   return eps;
 }
