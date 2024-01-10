@@ -22,7 +22,7 @@
 #include <cstring>
 #include <Windows.h>
 
-void getDelimiters(char* delimiters, int32_t maxStringLength) 
+void getDelimiters(char* delimiters, int32_t& maxStringLength) 
 {
   std::cout << "Enter delimiters: ";
   std::cin.getline(delimiters, maxStringLength);
@@ -33,7 +33,8 @@ void getDelimiters(char* delimiters, int32_t maxStringLength)
 
 bool exceptionForInvaluedArgument(char* inputString) 
 {
-  for (size_t i = 0; i < strlen(inputString); ++i) {
+  size_t len = strlen(inputString);
+  for (size_t i = 0; i < len; ++i) {
     if (std::isalpha(inputString[i])) {
       return true;
     }
@@ -41,7 +42,7 @@ bool exceptionForInvaluedArgument(char* inputString)
   return false;
 }
 
-void getInputString(char* inputString, int32_t maxStringLength)
+void getInputString(char* inputString, int32_t& maxStringLength)
  { 
   std::cout << "Enter a string: ";
   std::cin.getline(inputString, maxStringLength);
@@ -56,7 +57,8 @@ void getInputString(char* inputString, int32_t maxStringLength)
 bool vowelTest(char* word, char* key) 
 {
   char temp;
-  for (size_t i = 0; i < 12; ++i) {
+  size_t lenKey = strlen(key);
+  for (size_t i = 0; i < lenKey; ++i) {
     if (key[i] == word[0]) {
       temp = word[0];
       temp = std::toupper(temp);
