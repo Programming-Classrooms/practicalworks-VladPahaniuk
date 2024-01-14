@@ -20,6 +20,11 @@ std::string getInputString()
     std::string input;
     std::cout << "Введите строку: ";
     std::getline(std::cin, input);
+    while (input.empty())
+    {
+        std::cout <<"String cannot be empty. Try again";
+        std::getline(std::cin, input);
+    }
     return input;
 }
 
