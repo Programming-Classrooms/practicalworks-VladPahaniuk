@@ -15,8 +15,10 @@ MyString::MyString()
 // Конструктор c параметрами
 MyString::MyString(const char* str)
 {
-   
     length = strlen(str);
+    if(length == 0){
+    throw std::logic_error("Size can not be zero");
+   }
     this->str = new char[length + 1]; // для 0-терминатора используем +1;
 
     for (size_t i = 0; i < length; i++)
@@ -31,6 +33,9 @@ MyString::MyString(const char* str)
 MyString::MyString(const MyString& other)
 {
     length = strlen(other.str);
+    if(length == 0){
+    throw std::logic_error("Size can not be zero");
+   }
     this->str = new char[length + 1];
 
     for (size_t i = 0; i < length; i++)
@@ -185,7 +190,7 @@ std::ostream& operator<<(std::ostream& os, const MyString& str)
 
 std::istream& operator>>(std::istream& input, MyString& s)
 {
-    const int bufferSize = 1000;
+    const size_t bufferSize = 1000;
     char buffer[bufferSize];
     input.getline(buffer, bufferSize);
     // Проверка на переполнение строки
