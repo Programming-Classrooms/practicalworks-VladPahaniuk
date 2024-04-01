@@ -46,6 +46,7 @@ size_t List<Type>::getSize() const
   return size;
 }
 
+// push_front
 template<typename Type>
 void List<Type>::push_front(Type data)
 {
@@ -54,6 +55,7 @@ void List<Type>::push_front(Type data)
 
 }
 
+// push_back
 template<typename Type>
 void List<Type>::push_back(Type data) {
   if (this->head == nullptr) {
@@ -69,6 +71,7 @@ void List<Type>::push_back(Type data) {
   size++;
 }
 
+// pop_front
 template<typename Type>
 void List<Type>::pop_front()
 {
@@ -78,6 +81,7 @@ void List<Type>::pop_front()
   size--;
 }
 
+// pop_back
 template<typename Type>
 void List<Type>::pop_back()
 {
@@ -105,7 +109,7 @@ void List<Type>::pop_back()
   }
 }
 
-// Удаление по значению
+// Удаление элемента по значению 
 template<typename Type>
 void List<Type>::removeByValue(const Type& value) {
   Node* current = head;
@@ -128,7 +132,7 @@ void List<Type>::removeByValue(const Type& value) {
   }
 }
 
-// Поиск по значению
+// Поиск элемента по значению
 template<typename Type>
 size_t List<Type>::searchWithValue(const Type& value)
 {
@@ -157,7 +161,7 @@ void List<Type>::forEach(void (*callback)(const Type&)) {
   }
 }
 
-// Получение элемента по индексу через operator[]
+// operator[]
 template<typename Type>
 Type& List<Type>::operator[](const size_t index)
 {

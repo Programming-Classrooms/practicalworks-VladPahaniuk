@@ -29,6 +29,7 @@ public:
   // Оператор присваивания
   List<Type>& operator=(const List<Type>& other);
 
+  // Получение количества элементов List
   size_t getSize()const;
 
   void push_front(Type data);
@@ -37,12 +38,18 @@ public:
   void pop_front();
   void pop_back();
 
+  // Удаление элемента по значению 
   void removeByValue(const Type& value);
 
+  // Поиск элемента по значению
   size_t searchWithValue(const Type& value);
+
+  // Вывод через сallback функцию
   void forEach(void (*callback)(const Type&));
 
   Type& operator[](const size_t index);
+  
+  // Очищение List
   void clear();
 
 };
