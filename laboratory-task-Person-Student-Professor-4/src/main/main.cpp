@@ -6,8 +6,13 @@ int main()
 {
 	try
 	{
-		std::cout << "Максимальное количество людей в списке 100!\n ";
-		const size_t maxSizeOfPersons = 100;
+		std::cout << "Введите размерность списка студентов!";
+		size_t maxSizeOfPersons;
+		std::cin >> maxSizeOfPersons;
+		if (maxSizeOfPersons <= 0) {
+			throw::std::invalid_argument("List cannot be empty or size of list cannot be negative...");
+		}
+		
 		Person *persons[maxSizeOfPersons];
 		size_t numPersons = 0;
 		size_t choice = 0;
