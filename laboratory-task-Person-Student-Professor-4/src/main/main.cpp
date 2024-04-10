@@ -10,7 +10,7 @@ int main()
 		size_t maxSizeOfPersons;
 		std::cin >> maxSizeOfPersons;
 		if (maxSizeOfPersons <= 0) {
-			throw::std::invalid_argument("List cannot be empty or size of list cannot be negative...");
+			throw std::invalid_argument("List cannot be empty or size of list cannot be negative...");
 		}
 		
 		Person *persons[maxSizeOfPersons];
@@ -31,6 +31,10 @@ int main()
 			{
 			case 1:
 			{
+				if(numPersons + 1 >= maxSizeOfPersons) {
+					throw std::out_of_range("List is full");
+				}
+				
 				char name[100];
 				size_t course, group;
 				std::cout << "Введите ФИО студента: ";
@@ -51,6 +55,9 @@ int main()
 			}
 			case 2:
 			{
+				if(numPersons + 1 >= maxSizeOfPersons) {
+					throw std::out_of_range("List is full...");
+				}
 				char name[100];
 				char department[100];
 				std::cout << "Введите ФИО преподавателя: ";
@@ -101,6 +108,10 @@ int main()
 		}
 	}
 	catch (const std::invalid_argument &error)
+	{
+		std::cerr<< "Exception: " << error.what() << '\n';
+	}
+	catch (const std::out_of_range &error)
 	{
 		std::cerr<< "Exception: " << error.what() << '\n';
 	}
