@@ -272,7 +272,6 @@ void TDeque<TInfo>::DeleteItem(TDequeItem<TInfo> *other)
 // указатель на элемент с заданным индексом
 template <class TInfo>
 TDeque<TInfo>::TDequeItem<TInfo> *TDeque<TInfo>::PtrByIndex(unsigned index) const
-
 {
   if (!CorrectIndex(index))
   {
