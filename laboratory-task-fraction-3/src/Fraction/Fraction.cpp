@@ -272,11 +272,6 @@ Fraction::operator double() const {
     return static_cast<double>(numerator) / denominator;
 }
 
-
-
-
-
-
 Fraction& Fraction::operator/=(const Fraction& other) {
     if (other.numerator == 0) {
         throw Exception("Division by zero");

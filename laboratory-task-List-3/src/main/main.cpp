@@ -1,4 +1,5 @@
 #include "src/List/List.hpp"
+
 void printElement(const size_t& value) {
   std::cout << value << " ";
 }
@@ -6,10 +7,10 @@ int main() {
   try
   {
     List<Student> studentList;
-    Student student1{ "Padro", {4, 4, 4, 5, 6}, 1001 };
-    Student student2{ "Pedro", {10, 2, 3, 4, 7}, 1002 };
-    Student student3{ "ElRoky", {4, 10, 10, 10, 10}, 1003 };
-    Student student4{ "ElPoco", {3, 5, 7, 8, 10}, 1004 };
+    Student student1{ "Padro", 4, 4, 4, 5, 6, 1001 };
+    Student student2{ "Pedro", 10, 2, 3, 4, 7, 1002 };
+    Student student3{ "ElRoky", 4, 10, 10, 10, 10, 1003 };
+    Student student4{ "ElPoco", 3, 5, 7, 8, 10, 1004 };
 
     studentList.push_back(student2);
     studentList.push_back(student3);

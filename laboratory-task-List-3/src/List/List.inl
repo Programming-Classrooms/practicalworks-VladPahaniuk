@@ -156,7 +156,7 @@ void List<Type>::forEach(void (*callback)(const Type&)) {
   Node* current = head;
 
   while (current != nullptr) {
-    callback(current->data); // Вызываем callback-функцию для текущего элемента
+    callback(current->data);
     current = current->pointerNextElement;
   }
 }
