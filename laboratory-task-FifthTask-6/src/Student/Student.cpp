@@ -1,5 +1,6 @@
 #include "Student.hpp"
 
+// Функция для проверки файла (чтения)
 void checkFileInput(std::ifstream &file)
 {
     if (!file.good())
@@ -18,6 +19,7 @@ void checkFileInput(std::ifstream &file)
     }
 }
 
+// Функция для проверки файла (записи)
 void checkFileOutput(std::ofstream &file)
 {
     if (!file.good())
@@ -30,7 +32,10 @@ void checkFileOutput(std::ofstream &file)
         throw std::ios_base::failure("File is not opened!");
     }
 }
-Student::Student(std::string fullName, size_t course, size_t group) : fullName(fullName)
+
+
+// Конструктор c параметрами
+Student::Student(std::string fullName, size_t course, size_t group) : fullName(fullName), course(course), group(group)
 {
     if (course <= 0)
     {
@@ -47,16 +52,19 @@ Student::Student(std::string fullName, size_t course, size_t group) : fullName(f
     this->group = group;
 }
 
+// Перегрузка оператор меньше
 bool Student::operator<(const Student &other) const
 {
     return fullName < other.fullName;
 }
 
+// Вывод в поток
 std::ostream &operator<<(std::ostream &os, const Student &student)
 {
     os << student.fullName << " " << student.course << " " << student.group << "\n";
 }
 
+// Функция для сортировки по курсам и группам
 bool sortByCourseGroup(const Student &a, const Student &b)
 {
     if (a.course == b.course)
@@ -70,6 +78,7 @@ bool sortByCourseGroup(const Student &a, const Student &b)
     return a.course < b.course;
 }
 
+// Функция для чтения из файла
 void readStudentsFromFile(const std::string &filename, std::vector<Student> &students)
 {
     std::ifstream inputFile(filename);
@@ -86,6 +95,7 @@ void readStudentsFromFile(const std::string &filename, std::vector<Student> &stu
     inputFile.close();
 }
 
+// Функция для записи студентов, упорядоченных по  алфавиту
 void writeStudentsByFullName(const std::string &filename, const std::vector<Student> &students)
 {
     std::vector<Student> sortedStudents = students;
@@ -102,6 +112,7 @@ void writeStudentsByFullName(const std::string &filename, const std::vector<Stud
     outputFile.close();
 }
 
+// Функция для записи студентов, упорядоченных по курсам и группам
 void writeStudentsByCourseGroup(const std::string &filename, const std::vector<Student> &students)
 {
     std::vector<Student> sortedStudents = students;
