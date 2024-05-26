@@ -27,6 +27,9 @@ public:
     // Деструктор
     ~AuthorsList() = default;
 
+    // Получение размера списка
+    size_t getSize() const;
+    
     // Оператор присваивания
     AuthorsList& operator=(const AuthorsList&);
 
@@ -47,6 +50,10 @@ public:
 
     // Проверка на нахождение автора в списке
     bool contains(const Author& author);
+
+    // Получение размера списка
+    size_t size() const;
+
 };
 
 #endif 

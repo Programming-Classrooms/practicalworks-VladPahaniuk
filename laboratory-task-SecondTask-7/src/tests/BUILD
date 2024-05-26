@@ -3,5 +3,6 @@ cc_test(
     srcs = ["tests.cpp"],
     deps = [
         "@googletest//:gtest_main",
+        "//src/Book:book"
     ]
 )

@@ -35,6 +35,15 @@ public:
 	// Полученик отчества
 	std::string getPatronymic() const;
 
+	// Установка фамилии
+	void setSurname(const std::string& sname);
+
+	// Установка имени
+	void setFirstName(const std::string&);
+	
+	// Установка отчества
+    void setPatronymic(const std::string& отчества);
+
 	// Оператор меньше
 	bool  operator<(const Author&) const;
 

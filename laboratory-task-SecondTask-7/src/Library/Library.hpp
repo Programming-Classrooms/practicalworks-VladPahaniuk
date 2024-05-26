@@ -53,7 +53,7 @@ public:
 };
 
 // Проверка файла   
-void checkFileInput(std::ifstream &);
+bool checkFileInput(std::ifstream &, std::string);
 
 #endif // LIBRARY_HPP
 

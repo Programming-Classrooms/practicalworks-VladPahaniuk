@@ -3,7 +3,5 @@
 cc_binary(
     name = "cpp_app",
     srcs = ["main.cpp"],
-    deps = [
-        
-    ],
+    deps = ["//src/funcs:funcs"]
 )
