@@ -8,12 +8,12 @@
 Book::Book() : UDC(0), title(""), year(0), authors() {}
 
 // Конструктор с параметрами
-Book::Book(size_t udc, const std::string &title, size_t year, const AuthorsList &author):
-    UDC(udc),
-    title(title),
-    year(year),
-    authors(author)
-    {}
+Book::Book(size_t udc, const std::string &title, size_t year, const AuthorsList &author)
+{
+    setTitle(title);
+    setYear(year);
+    setAuthors(author);
+}
 
 // Конструктор копирования
 Book::Book(const Book &other) :

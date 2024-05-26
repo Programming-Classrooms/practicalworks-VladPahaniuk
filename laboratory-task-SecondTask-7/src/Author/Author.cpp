@@ -9,10 +9,13 @@ Author::Author() : surname("null"), firstName("NoName"), patronymic("null")
 {}
 
 // Конструктор c параметрами
-Author::Author(std::string sname, std::string fname, std::string patronymic) : surname(sname),
-                                                                               firstName(fname),
-                                                                               patronymic(patronymic)
-{}
+Author::Author(std::string sname, std::string fname, std::string patronymic) 
+{
+    setSurname(sname);
+    setFirstName(fname);
+    setPatronymic(patronymic);
+
+}
 
 // Конструктор копирования
 Author::Author(const Author &rhs) : surname(rhs.surname),
@@ -76,7 +79,7 @@ void Author::setFirstName(const std::string &fname)
 // Установка имени
 void Author::setPatronymic(const std::string &patronymic)
 {
-    if (patronymic.length() < 2 || patronymic.length() > 50)
+    if (patronymic.length() < 0 || patronymic.length() > 50)
     {
         throw std::invalid_argument("Отчество должно быть длиной от 2 до 50 символов.");
     }
