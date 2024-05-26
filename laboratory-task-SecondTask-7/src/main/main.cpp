@@ -7,13 +7,13 @@ int main()
         Library library;
 
         // Загрузка данных из файла
-        library.loadFromFile("src/file/file.txt");
+        library.readFromFile("src/file/file.txt");
 
         // Вывод библиотеки
         std::cout << "Library contents:\n"
                   << library << std::endl;
 
-std::cout << "*********************************\n";
+        std::cout << "*********************************\n";
 
         // Поиск книги по названию
         Book *foundBook = library.findBookByTitle("The Great Gatsby");
@@ -26,7 +26,7 @@ std::cout << "*********************************\n";
         {
             std::cout << "Book not found!" << std::endl;
         }
-std::cout << "*********************************\n";
+        std::cout << "*********************************\n";
 
         // Добавление автора к книге
         library.addAuthorToBook("The Great Gatsby", Author("Smith", "John", "Doe"));

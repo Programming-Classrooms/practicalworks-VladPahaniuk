@@ -1,5 +1,8 @@
 #include "Book.hpp"
-#include "Book.hpp"
+
+/*==========================================================*/
+/*====================Конструкторы==========================*/
+/*==========================================================*/
 
 // Конструктор по умолчанию
 Book::Book() : UDC(0), title(""), year(0), authors() {}
@@ -12,49 +15,62 @@ Book::Book(size_t udc, const std::string& title, size_t year, const AuthorsList&
 Book::Book(const Book& other)
     : UDC(other.UDC), title(other.title), year(other.year), authors(other.authors) {}
 
-// Геттеры
+
+/*==========================================================*/
+/*=======================Гетеры=============================*/
+/*==========================================================*/
+  
+// Получение УДК
 size_t Book::getUDC() const {
     return UDC;
 }
 
+// Получение названия
 std::string Book::getTitle() const {
     return title;
 }
 
+// Получение года издания
 size_t Book::getYear() const {
     return year;
 }
 
+// Получение авторов
 AuthorsList Book::getAuthors() const {
     return authors;
 }
 
-// Сеттеры
+
+/*==========================================================*/
+/*=======================Cетеры=============================*/
+/*==========================================================*/
+
+// Установка УДК
 void Book::setUDC(size_t udc) {
     this->UDC = udc;
 }
 
+// Установка названия
 void Book::setTitle(const std::string& title) {
     this->title = title;
 }
 
+// Установка года издания
 void Book::setYear(size_t year) {
     this->year = year;
 }
 
+// Установка авторов
 void Book::setAuthors(const AuthorsList& author) {
     this->authors = author;
 }
 
-// Методы для управления авторами
-void Book::addAuthor(const Author& author) {
-    authors.addAuthor(author);
-}
 
-void Book::removeAuthor(const Author& author) {
-    authors.removeAuthor(author);
-}
-
+/*==========================================================*/
+/*==========================================================*/
+/*=====================Операторы============================*/
+/*==========================================================*/
+/*==========================================================*/
 
 // Оператор сравнения
 bool Book::operator<(const Book& other) const {
@@ -81,3 +97,20 @@ std::istream& operator>>(std::istream& in, Book& book) {
     book.setAuthors(authors);
     return in;
 }
+
+
+/*================================================================================*/
+/*==================================== Методы ====================================*/
+/*================================================================================*/
+
+// Методы для управления авторами
+void Book::addAuthor(const Author& author) {
+    authors.addAuthor(author);
+}
+
+// Удаление автора
+void Book::removeAuthor(const Author& author) {
+    authors.removeAuthor(author);
+}
+
+

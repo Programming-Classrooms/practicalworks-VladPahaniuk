@@ -76,7 +76,6 @@ int main()
 {
 	try
 	{
-
 		std::unordered_map<std::string, int> wordCounts;
 		std::set<std::string> uniqueWords;
 
