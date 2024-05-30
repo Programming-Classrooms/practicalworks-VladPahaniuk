@@ -1,0 +1,4 @@
+Goose 6
+Maxim 5
+Duck 5
+Dimka 8
